@@ -22,6 +22,12 @@ class DataLoader
         catch (Exception e)
         {
             System.out.println(e);
+            // popup a message dialog to show error
+            // title: "wake on lan"
+            // message: "No config file found\nPlease make sure config.csv is in the same directory as the jar file"
+            javax.swing.JOptionPane.showMessageDialog(null, "No config file found\nPlease make sure config.csv is in the same directory as the jar file", "wake on lan", javax.swing.JOptionPane.ERROR_MESSAGE);
+            // exit the program
+            System.exit(1);
         }
         return computers;
     }

@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.util.Vector;
 
 class Window extends JFrame {
-    public Window() {
+    public Window(String filePath) {
         super("wake on lan");
         setSize(600, 400);
         // centralize the window
@@ -17,7 +17,7 @@ class Window extends JFrame {
         JPanel top = new JPanel();
         top.setLayout(new BoxLayout(top, BoxLayout.X_AXIS));
         // add jlist of mac address to the top
-        Vector<Computer> computers = DataLoader.readCSV("config.csv");
+        Vector<Computer> computers = DataLoader.readCSV(filePath);
         JList macList = new JList(computers);
         macList.setCellRenderer(new MacListCellRenderer());
         macList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
