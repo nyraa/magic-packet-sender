@@ -45,8 +45,8 @@ class Window extends JFrame {
                 }
             }
         });
-        bottom.add(add);
-        bottom.add(remove);
+        // bottom.add(add);
+        // bottom.add(remove);
         bottom.add(wake);
 
         // add the top and bottom to the pane
