@@ -7,6 +7,8 @@ class Window extends JFrame {
     public Window() {
         super("wake on lan");
         setSize(600, 400);
+        // centralize the window
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel pane = new JPanel();
@@ -34,12 +36,24 @@ class Window extends JFrame {
         JButton wake = new JButton("wake");
         // add event to wake and print selected mac to console
         wake.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
+                // return if no item is selected
+                if (macList.getSelectedIndex() == -1) {
+                    // popup a message dialog to show no item is selected
+                    JOptionPane.showMessageDialog(null, "no item is selected", "wake on lan", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 byte[] mac = ((Computer)macList.getSelectedValue()).getMac();
                 String mac_str = ((Computer)macList.getSelectedValue()).getMacStr();
+                String computer_name = ((Computer)macList.getSelectedValue()).getName();
                 System.out.println(mac_str);
                 try {
                     Magic.sendMagicPacket(mac);
+                    // popup a message dialog to show which computer is waked
+                    // title: "wake on lan"
+                    // message: "magic packet is sent to " + computer_name + " (" + mac_str + ")"
+                    JOptionPane.showMessageDialog(null, "magic packet is sent to " + computer_name + " (" + mac_str + ")", "wake on lan", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
                     System.out.println(ex);
                 }
