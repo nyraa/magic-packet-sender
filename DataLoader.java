@@ -16,7 +16,6 @@ class DataLoader
             {
                 String[] data = line.split(",");
                 computers.add(new Computer(data[1], data[0]));
-                System.out.println(data[0] + " " + data[1]);
             }
             br.close();
         }

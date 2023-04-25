@@ -35,8 +35,9 @@ class Window extends JFrame {
         // add event to wake and print selected mac to console
         wake.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String mac = ((Computer)macList.getSelectedValue()).getMac();
-                System.out.println(mac);
+                byte[] mac = ((Computer)macList.getSelectedValue()).getMac();
+                String mac_str = ((Computer)macList.getSelectedValue()).getMacStr();
+                System.out.println(mac_str);
                 try {
                     Magic.sendMagicPacket(mac);
                 } catch (Exception ex) {
@@ -67,7 +68,7 @@ class MacListCellRenderer extends DefaultListCellRenderer {
         super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
         if (value instanceof Computer) {
             Computer computer = (Computer) value;
-            setText(computer.getName() + " (" + computer.getMac() + ")");
+            setText(computer.getName() + " (" + computer.getMacStr() + ")");
         }
         return this;
     }
