@@ -1,7 +1,7 @@
 all:
-	javac -d ./ ./*.java
+	mkdir -p bin
+	javac -d ./bin ./src/*.java
 compress:
-	make all
-	jar -cvfe ./wakeonlan.jar wakeonlan *.class
+	jar -cvfe ./wakeonlan.jar wakeonlan -C ./bin .
 clean:
-	rm -rf *.class
+	rm -rf bin
