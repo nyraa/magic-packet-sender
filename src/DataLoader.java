@@ -6,8 +6,10 @@ import java.util.Vector;
 
 class DataLoader
 {
+    private static Vector<Computer> computers = null;
+    private static final String filename = "config.csv";
     // read csv (name, mac) from csv file and return vector<Computer>
-    public static Vector<Computer> readCSV(String path)
+    private static Vector<Computer> readCSV(String path)
     {
         Vector<Computer> computers = new Vector<Computer>();
         try
@@ -33,5 +35,37 @@ class DataLoader
             System.exit(1);
         }
         return computers;
+    }
+    public static Vector<Computer> getComputers()
+    {
+        if (computers == null)
+        {
+            computers = readCSV(filename);
+        }
+        return computers;
+    }
+    public static boolean addComputer(Computer computer)
+    {
+        return computers.add(computer);
+    }
+    public static boolean removeComputer(Computer computer)
+    {
+        return computers.remove(computer);
+    }
+    public static void saveData()
+    {
+        try
+        {
+            java.io.PrintWriter pw = new java.io.PrintWriter(new java.io.FileOutputStream(filename));
+            for (Computer computer : computers)
+            {
+                pw.println(computer.getName() + "," + computer.getMacStr());
+            }
+            pw.close();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
     }
 }

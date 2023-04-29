@@ -16,8 +16,9 @@ class Window extends JFrame {
         // a select list of mac address on the top, some button on the bottom
         JPanel top = new JPanel();
         top.setLayout(new BoxLayout(top, BoxLayout.X_AXIS));
+
         // add jlist of mac address to the top
-        Vector<Computer> computers = DataLoader.readCSV(filePath);
+        Vector<Computer> computers = DataLoader.getComputers();
         JList macList = new JList(computers);
         macList.setCellRenderer(new MacListCellRenderer());
         macList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -31,8 +32,31 @@ class Window extends JFrame {
         JPanel bottom = new JPanel();
         bottom.setLayout(new BoxLayout(bottom, BoxLayout.X_AXIS));
         // add the buttons to the bottom
-        JButton add = new JButton("add");
+        JButton edit = new JButton("edit/add");
+        edit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                // if item selected, popup a dialog to edit
+                // else popup a empty dialog to add
+                
+            }
+        });
         JButton remove = new JButton("remove");
+        // add event remove
+        remove.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                if(macList.getSelectedIndex() == -1)
+                {
+                    return;
+                }
+                Computer computer = (Computer)macList.getSelectedValue();
+                if(DataLoader.removeComputer(computer))
+                {
+                    macList.updateUI();
+                }
+            }
+        });
         JButton wake = new JButton("wake");
         // add event to wake and print selected mac to console
         wake.addActionListener(new ActionListener() {
@@ -59,8 +83,8 @@ class Window extends JFrame {
                 }
             }
         });
-        // bottom.add(add);
-        // bottom.add(remove);
+        bottom.add(add);
+        bottom.add(remove);
         bottom.add(wake);
 
         // add the top and bottom to the pane
