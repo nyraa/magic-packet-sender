@@ -19,6 +19,7 @@ class DataLoader
             String line;
             while ((line = br.readLine()) != null)
             {
+                if(line.equals("") || line.startsWith("#")) continue;
                 String[] data = line.split(",");
                 computers.add(new Computer(data[1], data[0]));
             }
