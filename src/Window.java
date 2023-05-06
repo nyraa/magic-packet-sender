@@ -32,31 +32,6 @@ class Window extends JFrame {
         JPanel bottom = new JPanel();
         bottom.setLayout(new BoxLayout(bottom, BoxLayout.X_AXIS));
         // add the buttons to the bottom
-        JButton edit = new JButton("edit/add");
-        edit.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e)
-            {
-                // if item selected, popup a dialog to edit
-                // else popup a empty dialog to add
-                
-            }
-        });
-        JButton remove = new JButton("remove");
-        // add event remove
-        remove.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e)
-            {
-                if(macList.getSelectedIndex() == -1)
-                {
-                    return;
-                }
-                Computer computer = (Computer)macList.getSelectedValue();
-                if(DataLoader.removeComputer(computer))
-                {
-                    macList.updateUI();
-                }
-            }
-        });
         JButton wake = new JButton("wake");
         // add event to wake and print selected mac to console
         wake.addActionListener(new ActionListener() {
@@ -83,8 +58,6 @@ class Window extends JFrame {
                 }
             }
         });
-        bottom.add(add);
-        bottom.add(remove);
         bottom.add(wake);
 
         // add the top and bottom to the pane
