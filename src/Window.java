@@ -19,7 +19,7 @@ class Window extends JFrame {
 
         // add jlist of mac address to the top
         Vector<Computer> computers = DataLoader.getComputers();
-        JList macList = new JList(computers);
+        JList<Computer> macList = new JList<>(computers);
         macList.setCellRenderer(new MacListCellRenderer());
         macList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         macList.setLayoutOrientation(JList.VERTICAL);
