@@ -54,7 +54,7 @@ class Window extends JFrame {
                     // message: "magic packet is sent to " + computer_name + " (" + mac_str + ")"
                     JOptionPane.showMessageDialog(null, "magic packet is sent to " + computer_name + " (" + mac_str + ")", "wake on lan", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
-                    System.out.println(ex);
+                    ex.printStackTrace();
                 }
             }
         });
